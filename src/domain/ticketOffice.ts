@@ -1,10 +1,16 @@
-class TicketOffice {
+import { Ticket } from "./ticket";
+
+export class TicketOffice {
     private amount: number;
     private tickets: Ticket[] = [];
 
     public constructor(amount: number, tickets: Ticket[]) {
         this.amount = amount;
         this.tickets.push(...tickets);
+    }
+
+    public getAmount = (): number => {
+        return this.amount;
     }
 
     public getTicket = (): Ticket => {

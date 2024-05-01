@@ -1,4 +1,7 @@
-class Bag {
+import { Invitation } from "./invitation";
+import { Ticket } from "./ticket";
+
+export class Bag {
     private amount: number;
     private invitation?: Invitation;
     private ticket?: Ticket;
@@ -9,15 +12,19 @@ class Bag {
     }
 
     public hasInvitation = (): boolean => {
-        return !this.invitation;
+        return this.invitation !== undefined;
     }
 
     public hasTicket = (): boolean => {
-        return !this.ticket;
+        return this.ticket !== undefined;
     }
 
     public setTicket = (ticket: Ticket): void => {
         this.ticket = ticket;
+    }
+
+    public getAmount = (): number => {
+        return this.amount;
     }
 
     public minusAmount = (amount: number): void => {
