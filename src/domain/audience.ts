@@ -9,14 +9,6 @@ export class Audience {
     }
 
     public buy = (ticket: Ticket): number => {
-        if (this.bag.hasInvitation()) {
-            this.bag.setTicket(ticket);
-            return 0;
-        }
-
-        this.bag.setTicket(ticket);
-        this.bag.minusAmount(ticket.getFee());
-
-        return ticket.getFee();
+        return this.bag.hold(ticket);
     }
 }
