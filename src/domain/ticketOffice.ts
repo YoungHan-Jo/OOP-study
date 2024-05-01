@@ -1,3 +1,4 @@
+import { Audience } from "./audience";
 import { Ticket } from "./ticket";
 
 export class TicketOffice {
@@ -13,15 +14,19 @@ export class TicketOffice {
         return this.amount;
     }
 
-    public getTicket = (): Ticket => {
+    public sellTicketTo = (audience: Audience): void => {
+        this.plusAmount(audience.buy(this.getTicket()));
+    }
+
+    private getTicket = (): Ticket => {
         return this.tickets.shift(); // index0の要素を取り出す
     }
 
-    public minusAmount = (amount: number): void => {
+    private minusAmount = (amount: number): void => {
         this.amount -= amount;
     }
 
-    public plusAmount = (amount: number): void => {
+    private plusAmount = (amount: number): void => {
         this.amount += amount;
     }
 

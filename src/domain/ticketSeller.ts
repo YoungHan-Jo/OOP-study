@@ -9,7 +9,7 @@ export class TicketSeller {
     }
 
     public sellTo = (audience: Audience): void => {
-        this.ticketOffice.plusAmount(audience.buy(this.ticketOffice.getTicket()));
+        this.ticketOffice.sellTicketTo(audience);
     }
 
 }
