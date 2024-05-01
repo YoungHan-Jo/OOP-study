@@ -11,27 +11,39 @@ export class Bag {
         this.invitation = invitation;
     }
 
-    public hasInvitation = (): boolean => {
-        return this.invitation !== undefined;
+    public getAmount = (): number => {
+        return this.amount;
     }
 
     public hasTicket = (): boolean => {
         return this.ticket !== undefined;
     }
 
-    public setTicket = (ticket: Ticket): void => {
+    public hold = (ticket: Ticket): number => {
+        if (this.hasInvitation()) {
+            this.setTicket(ticket);
+            return 0;
+        }
+
+        this.setTicket(ticket);
+        this.minusAmount(ticket.getFee());
+
+        return ticket.getFee();
+    }
+
+    private hasInvitation = (): boolean => {
+        return this.invitation !== undefined;
+    }
+
+    private setTicket = (ticket: Ticket): void => {
         this.ticket = ticket;
     }
 
-    public getAmount = (): number => {
-        return this.amount;
-    }
-
-    public minusAmount = (amount: number): void => {
+    private minusAmount = (amount: number): void => {
         this.amount -= amount;
     }
 
-    public plusAmount = (amount: number): void => {
+    private plusAmount = (amount: number): void => {
         this.amount += amount;
     }
 }
