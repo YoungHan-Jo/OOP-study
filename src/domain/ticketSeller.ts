@@ -5,8 +5,19 @@ class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    public getTicketOffice = (): TicketOffice => {
-        return this.ticketOffice;
+    public sellTo = (audience: Audience): void => {
+        if (audience.getBag().hasInvitation()) {
+            const ticket = this.ticketOffice.getTicket();
+            audience.getBag().setTicket(ticket);
+            return;
+        }
+
+        const ticket = this.ticketOffice.getTicket();
+        const ticketFee = ticket.getFee();
+        audience.getBag().minusAmount(ticketFee);
+        this.ticketOffice.plusAmount(ticketFee);
+        audience.getBag().setTicket(ticket);
+        return;
     }
 
 }

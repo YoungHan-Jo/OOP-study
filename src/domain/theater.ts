@@ -6,18 +6,6 @@ class Theater {
     }
 
     public enter = (audience: Audience): void => {
-        if (audience.getBag().hasInvitation()) {
-            const ticket = this.ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-            return;
-        }
-
-        const ticket = this.ticketSeller.getTicketOffice().getTicket();
-        const ticketFee = ticket.getFee();
-        audience.getBag().minusAmount(ticketFee);
-        this.ticketSeller.getTicketOffice().plusAmount(ticketFee);
-        audience.getBag().setTicket(ticket);
-
-        return;
+        this.ticketSeller.sellTo(audience);
     }
 }
