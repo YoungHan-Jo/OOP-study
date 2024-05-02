@@ -1,11 +1,11 @@
 export class Ticket {
-    private fee: number;
+  private fee: number;
 
-    public constructor(fee: number) {
-        this.fee = fee;
-    }
+  public constructor(fee: number) {
+    this.fee = fee;
+  }
 
-    public getFee = (): number => {
-        return this.fee;
-    }
+  public getFee = (): number => {
+    return this.fee;
+  };
 }

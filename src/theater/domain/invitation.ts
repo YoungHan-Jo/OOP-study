@@ -1,7 +1,7 @@
 export class Invitation {
-    private when: Date;
+  private when: Date;
 
-    public constructor(when: Date) {
-        this.when = when;
-    }
+  public constructor(when: Date) {
+    this.when = when;
+  }
 }
