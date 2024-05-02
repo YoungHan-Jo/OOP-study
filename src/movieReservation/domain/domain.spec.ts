@@ -1,8 +1,6 @@
 import { Customer } from "./Customer";
-import { Money } from "../valueObject/Money";
 import { Screening } from "./Screening";
 import { Movie } from "./movie";
-import { Reservation } from "./reservation";
 
 describe('Domain: movieReservation', () => {
 
