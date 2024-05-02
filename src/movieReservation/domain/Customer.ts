@@ -1,5 +1,5 @@
-import { Reservation } from "./reservation";
+import { Reservation } from './reservation';
 
 export class Customer {
-    private reserviations: Reservation[] = [];
+  private reserviations: Reservation[] = [];
 }
