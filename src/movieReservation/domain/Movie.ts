@@ -30,6 +30,10 @@ export class Movie {
     return this.fee;
   };
 
+  public changeDiscountPolicy = (discountPolicy: DiscountPolicy): void => {
+    this.discountPolicy = discountPolicy;
+  }
+
   public calculateMovieFee = (screening: Screening): Money => {
     return this.fee.minus(
       this.discountPolicy.calculateDiscountAmount(screening),
