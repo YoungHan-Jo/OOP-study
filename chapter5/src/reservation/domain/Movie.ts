@@ -1,7 +1,7 @@
 import { MovieType } from "../constant/MovieType";
 import { Duration } from "../value/Duration";
 import { Money } from "../value/Money";
-import { DiscountCondition } from "./DiscountCondition";
+import { DiscountCondition } from "./discountCondition/DiscountCondition.interface";
 import { Screening } from "./Screening";
 
 export class Movie {
