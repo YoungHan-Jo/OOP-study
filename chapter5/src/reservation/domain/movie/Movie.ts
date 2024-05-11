@@ -1,6 +1,4 @@
-import { MovieType } from "../../constant/MovieType";
-import { Duration } from "../../value/Duration";
-import { Money } from "../../value/Money";
+import { Duration, Money } from "../../value";
 import { DiscountCondition } from "../discountCondition/DiscountCondition.interface";
 import { Screening } from "../Screening";
 
@@ -35,12 +33,7 @@ export abstract class Movie {
     }
 
     private isDiscountable = (screening: Screening): boolean => {
-        for (const discountCondition of this.discountConditionList) {
-            if (discountCondition.isSatisfiedBy(screening)) {
-                return true;
-            }
-        }
-        return false;
+        return this.discountConditionList.some(discountCondition => discountCondition.isSatisfiedBy(screening));
     }
 
     protected getFee = (): Money => {

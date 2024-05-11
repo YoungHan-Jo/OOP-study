@@ -1,6 +1,5 @@
-import { Duration } from "src/reservation/value/Duration";
 import { Movie } from "./Movie";
-import { Money } from "src/reservation/value/Money";
+import { Money, Duration } from "src/reservation/value";
 import { DiscountCondition } from "../discountCondition/DiscountCondition.interface";
 
 export class PercentDiscountMovie extends Movie {
