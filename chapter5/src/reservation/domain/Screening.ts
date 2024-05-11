@@ -1,5 +1,5 @@
 import { Money } from "../value/Money";
-import { Movie } from "./Movie";
+import { Movie } from "./movie/Movie";
 import { Reservation } from "./Reservation";
 
 export class Screening {
