@@ -1,0 +1,7 @@
+export * from './ratePolicy.interface'
+export * from './additionalRatePolicy/additionalRatePolicy'
+export * from './additionalRatePolicy/rateDiscountablePolicy'
+export * from './additionalRatePolicy/taxablePolicy'
+export * from './basicRatePolicy/basicRatePolicy'
+export * from './basicRatePolicy/nightlyDiscountPolicy'
+export * from './basicRatePolicy/regularPolicy'

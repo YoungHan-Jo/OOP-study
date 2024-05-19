@@ -1,6 +1,3 @@
 export class Reservation {
-
-    public constructor() {
-
-    }
+  public constructor() {}
 }

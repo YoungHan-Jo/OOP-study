@@ -1,5 +1,5 @@
-import { Screening } from "../Screening";
+import { Screening } from '../Screening';
 
 export interface DiscountCondition {
-    isSatisfiedBy(screening: Screening): boolean;
+  isSatisfiedBy(screening: Screening): boolean;
 }
