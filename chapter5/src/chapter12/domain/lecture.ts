@@ -13,7 +13,7 @@ export class Lecture {
         this.scores = scores;
     }
 
-    public average(some?: any): number {
+    public average(_?: any): number {
         return this.scores.reduce((a, b) => a + b) / this.scores.length;
     }
     public getScores(): number[] {
@@ -21,7 +21,7 @@ export class Lecture {
     }
 
     public stats(): string {
-        return this.getMethod();
+        return this.getMethod(); // self 참조
     }
 
     public getMethod(): string {

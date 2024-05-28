@@ -35,6 +35,11 @@ describe('Domain', () => {
             ]
         })
         console.log(gradeLecture.stats())
+        // gradeLecture에는 stats() 메서드가 없지만,
+        // Lecture에 stats() 메서드가 있어서 GradeLecture에서도 사용 가능
+        // Lecture에 있는 stats()는 this.getMethod()를 호출하고 있지만
+        // Lecture을 상속받은 GradeLecture에서는 getMethod()를 오버라이드 하고 있어서
+        // GradeLecture의 getMethod()가 호출된다.
 
         //When
         const result = gradeLecture.evaluate();
