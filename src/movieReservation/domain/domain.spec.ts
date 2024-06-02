@@ -13,7 +13,7 @@ import { Movie } from './movie';
 describe('Domain: movieReservation', () => {
     const MOVIE_FEE = 1500;
     const AUDIENCE_COUNT = 2;
-    const WHEN_SCREENED = new Date('2021-07-01');
+    const TOMORROW = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
 
     let customer: Customer;
     let movieByAmountDiscountPolicy: Movie;
@@ -52,7 +52,7 @@ describe('Domain: movieReservation', () => {
         const screening = new Screening({
             movie: movieByAmountDiscountPolicy,
             sequence: screeningSequence,
-            whenScreened: WHEN_SCREENED,
+            whenScreened: TOMORROW,
         });
 
         // When
@@ -74,7 +74,7 @@ describe('Domain: movieReservation', () => {
         const screening = new Screening({
             movie: movieByAmountDiscountPolicy,
             sequence: incorrectScreeningSequence,
-            whenScreened: WHEN_SCREENED,
+            whenScreened: TOMORROW,
         });
 
         // When
@@ -105,7 +105,7 @@ describe('Domain: movieReservation', () => {
         const screening = new Screening({
             movie: movieByNoneDiscountPolicy,
             sequence: 11,
-            whenScreened: WHEN_SCREENED,
+            whenScreened: TOMORROW,
         });
 
         // When
@@ -137,7 +137,7 @@ describe('Domain: movieReservation', () => {
         const screening = new Screening({
             movie: movieByAmountDiscountPolicy,
             sequence: 1,
-            whenScreened: WHEN_SCREENED,
+            whenScreened: TOMORROW,
         })
 
         // When
@@ -149,6 +149,78 @@ describe('Domain: movieReservation', () => {
                 amount: MOVIE_FEE * 0.9 * AUDIENCE_COUNT,
             }).getAmount()
         )
-
     })
+
+    it('if audience count is negative, it would be error', () => {
+        // Given
+        const discountAmount = 100;
+        const screeningSequence = 1;
+
+        const screening = new Screening({
+            movie: movieByAmountDiscountPolicy,
+            sequence: screeningSequence,
+            whenScreened: TOMORROW,
+        });
+
+        // Then
+        expect(() => {
+            screening.reserve(customer, 0)
+        }).toThrow('customer is null or audienceCount is less than 1')
+    });
+
+    it('if customer is null, it would be error', () => {
+        // Given
+        const discountAmount = 100;
+        const screeningSequence = 1;
+
+        const screening = new Screening({
+            movie: movieByAmountDiscountPolicy,
+            sequence: screeningSequence,
+            whenScreened: TOMORROW,
+        });
+
+        // Then
+        expect(() => {
+            screening.reserve(null, 1)
+        }).toThrow('customer is null or audienceCount is less than 1')
+    });
+
+    it('when creating screen, movie should not be null', () => {
+        // Given
+        const discountAmount = 100;
+        const screeningSequence = 1;
+
+        // Then
+        expect(() => {
+            new Screening({
+                movie: null,
+                sequence: screeningSequence,
+                whenScreened: TOMORROW,
+            });
+        }).toThrow('movie should not be null')
+    });
+
+    it('when creating screen, sequence should be greater than 0', () => {
+
+        // Then
+        expect(() => {
+            new Screening({
+                movie: movieByAmountDiscountPolicy,
+                sequence: 0,
+                whenScreened: TOMORROW,
+            });
+        }).toThrow('sequence should be greater than 0')
+    });
+
+    it('when creating screen, whenScreend should be greater than now', () => {
+
+        // Then
+        expect(() => {
+            new Screening({
+                movie: movieByAmountDiscountPolicy,
+                sequence: 1,
+                whenScreened: new Date(new Date().getTime() - 1000),
+            });
+        }).toThrow('whenScreened should be greater than current date')
+    });
 });

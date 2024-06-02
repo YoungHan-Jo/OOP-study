@@ -20,15 +20,30 @@ export class Bag {
   };
 
   public hold = (ticket: Ticket): number => {
+    let result: number;
     if (this.hasInvitation()) {
       this.setTicket(ticket);
-      return 0;
+      result = 0;
+
+      // postcondition
+      if (result < 0) {
+        throw new Error('ticket fee should be greater than or equal to 0');
+      }
+
+      return result;
     }
 
     this.setTicket(ticket);
     this.minusAmount(ticket.getFee());
 
-    return ticket.getFee();
+    result = ticket.getFee();
+
+    // postcondition
+    if (result < 0) {
+      throw new Error('ticket fee should be greater than or equal to 0');
+    }
+
+    return result;
   };
 
   private hasInvitation = (): boolean => {

@@ -8,6 +8,20 @@ export class Screening {
   private sequence: number;
   private whenScreened: Date;
 
+  private invariants() {
+    if (this.movie === null) {
+      throw new Error('movie should not be null');
+    }
+
+    if (this.sequence <= 0) {
+      throw new Error('sequence should be greater than 0');
+    }
+
+    if (this.whenScreened < new Date()) {
+      throw new Error('whenScreened should be greater than current date');
+    }
+  }
+
   public constructor({
     movie,
     sequence,
@@ -20,6 +34,8 @@ export class Screening {
     this.movie = movie;
     this.sequence = sequence;
     this.whenScreened = whenScreened;
+
+    this.invariants();
   }
 
   public getStartTime = (): Date => {
@@ -39,6 +55,11 @@ export class Screening {
   };
 
   public reserve = (customer: Customer, audienceCount: number): Reservation => {
+    // precondition
+    if (customer === null || audienceCount <= 0) {
+      throw new Error('customer is null or audienceCount is less than 1');
+    }
+
     return new Reservation({
       customer,
       screening: this,
