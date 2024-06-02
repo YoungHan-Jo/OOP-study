@@ -2,7 +2,7 @@ import { Duration, Money } from '../../../value';
 import { Call } from '../../call';
 import { BasicRatePolicy } from './basicRatePolicy';
 
-export class RegularPolicy extends BasicRatePolicy {
+export class FixedFeePolicy extends BasicRatePolicy {
   private amount: Money;
   private seconds: Duration;
 

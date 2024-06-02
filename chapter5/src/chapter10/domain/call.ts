@@ -1,19 +1,30 @@
 import { Duration } from '../value/duration';
+import { DateTimeInterval } from './ratePolicy';
 
 export class Call {
-  private from: Date;
-  private to: Date;
+  private interval: DateTimeInterval;
 
   public constructor({ from, to }: { from: Date; to: Date }) {
-    this.from = from;
-    this.to = to;
+    this.interval = DateTimeInterval.of({ from, to });
+  }
+
+  public splitByDay(): DateTimeInterval[] {
+    return this.interval.splitByDay();
   }
 
   public getDuration(): Duration {
-    return Duration.between(this.from, this.to);
+    return this.interval.duration();
   }
 
-  public isAfterNightlyDiscountHour(lateNightHour: number): boolean {
-    return this.from.getHours() >= lateNightHour;
+  public getFrom(): Date {
+    return this.interval.getFrom();
+  }
+
+  public getTo(): Date {
+    return this.interval.getTo();
+  }
+
+  public getInterval(): DateTimeInterval {
+    return this.interval;
   }
 }

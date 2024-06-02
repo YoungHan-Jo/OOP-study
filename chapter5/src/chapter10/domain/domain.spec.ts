@@ -3,13 +3,13 @@ import { Call } from './call';
 import { Phone } from './phone/phone';
 import { TaxablePolicy } from './ratePolicy';
 import { NightlyDiscountPolicy } from './ratePolicy/basicRatePolicy/nightlyDiscountPolicy';
-import { RegularPolicy } from './ratePolicy/basicRatePolicy/regularPolicy';
+import { FixedFeePolicy } from './ratePolicy/basicRatePolicy/fixedFeePolicy';
 
 describe('Domain', () => {
     it('calculateFee', () => {
         //Given
         const regularPhone = new Phone({
-            ratePolicy: new RegularPolicy({
+            ratePolicy: new FixedFeePolicy({
                 amount: new Money(1),
                 seconds: new Duration(10),
             }),
@@ -73,7 +73,7 @@ describe('Domain', () => {
         //Given
         const phone = new Phone({
             ratePolicy: new TaxablePolicy({
-                next: new RegularPolicy({
+                next: new FixedFeePolicy({
                     amount: new Money(feePer),
                     seconds: new Duration(10),
                 }),
